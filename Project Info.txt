@@ -1,0 +1,22 @@
+4 primary use pages and a settings page:
+
+Home/Dashboard:
+--> event amount per tech in tech stack
+--> notifications section
+--> Data Accuracy section
+
+Integration Visualization:
+--> Contains the event visual separated per tech item 
+--> integration links between tech items 
+--> Optional: edges contain information about what is being sent between tech items
+
+Data Validation:
+--> Section that contains possible concerns 
+--> optional section. 
+
+Tool stack:
+--> contains all tech items including auth, etc
+--> option to add a tech item. 
+
+Settings:
+--> Bro it's settings, guess.
