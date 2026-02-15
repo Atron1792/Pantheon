@@ -48,9 +48,14 @@ Two terminals are used during development: one for the backend and one for the f
   npm run dev
   ```
 
+- Checkout the frontend:
+    http://localhost:3000/
+
 ## Demo Case
 
-For the demo we manually pull databases.
+For the purposes of the demo, data sources were manually pulled into the system.
 
-debug chance:
+Google Analytics requires access via BigQuery, and BigQuery requires a full authentication setup. Due to the limited timeframe of the hackathon, completing this end-to-end authentication flow was not feasible.
+
+Debug Chance:
 --> for god knows why, Sidebar.tsx sometimes is named with lowercase s instead of capital s. if this error should occur again, please rename the file to the capital s
