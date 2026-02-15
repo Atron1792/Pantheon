@@ -46,6 +46,11 @@ def index():
         
         print("hello world")
         #send notification here
+
+@app.route("/api/companies")
+def companyData():
+    outputValues = getSpecificData("companies","hubSpot", ["'Company name'"], [False], "CRM")
+    return jsonify(outputValues)
     
     
 if __name__ == "__main__":
