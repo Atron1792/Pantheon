@@ -97,6 +97,7 @@ def createNewTable(tName, techStackItemName, tHeaders, tHeadersType, tData, tTyp
             sqlHeaderString += quotedHeader + " " + tHeadersType[i] + ", "
             
     # execute the sql create table using table name and header string
+    dbCursor.execute("DROP TABLE IF EXISTS " + tName + ";")
     dbCursor.execute("CREATE TABLE IF NOT EXISTS " + tName + " (" + sqlHeaderString + ");")
     
     # get all of the data into an sql string

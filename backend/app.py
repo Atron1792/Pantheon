@@ -6,13 +6,8 @@ from utils.dbManager import adminCreateStartingDatabase
 # App setup
 app = Flask(__name__)
 
-adminCreateStartingDatabase()
-
 # Allow frontend (Next.js) to call Flask during dev
 CORS(app, resources={r"/api/*": {"origins": "*"}})
-
-conn = sqlite3.connect("app.db", check_same_thread=False)
-dbCursor = conn.cursor()
 
 # Health check
 @app.get("/api/health")

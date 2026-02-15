@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Sidebar } from "@/app/components/Sidebar";
+import { Sidebar } from "@/app/components/sidebar";
 
 export const metadata = {
   title: "Panethon",
