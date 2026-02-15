@@ -203,7 +203,7 @@ def startUpDataValidation():
             functionOutput.append(rawDataCSVItem)
     
     if (len(functionOutput) == 0):
-        return False
+        return True
     
     return functionOutput
     
@@ -267,3 +267,10 @@ def getAllData(tName, techStackItemName, conditions, tType):
     dbCursor.close()
     dbConnection.close()
     return result
+
+
+# gets the basic information on a data source 
+# output: [tHeader1, tHeader2, etc]
+def getCSVDataSourceHeaders(techStackItemName, tName):
+    df = pd.read_csv(rawDataPath + "/" + techStackItemName + "/" + techStackItemName + "-" + tName + ".csv")
+    return df.columns.tolist()
