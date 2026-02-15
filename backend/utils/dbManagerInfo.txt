@@ -1,3 +1,17 @@
 CreateNewDB
---> Creates a new database for the new data source
---> if data source tech stack already exists: add to existing tech stack database
+--> Creates a new table for the new data source
+--> if data source tech stack already exists: add table to existing tech stack database
+
+startUpDataValidation
+--> checks orderedData vs rawData for discrepancies 
+--> if discrepancy, return notification.
+
+Variable formats:
+--> tData:
+        [
+            [row1Attr1,row1Attr2,etc],
+            [row2Attr1,row2Attr2,etc],
+            [row3Attr1,row3Attr2,etc]
+        ]
+--> tName: lowerCase String
+--> tHeader
