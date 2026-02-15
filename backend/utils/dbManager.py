@@ -17,6 +17,14 @@ def checkAttributeType(columnData):
     except (ValueError, TypeError):
         return "TEXT"
 
+def adminResetDemo():
+    dbConnection = sqlite3.connect(orderedDataPath + "/CRM/hubSpot/hubSpot.db" )
+    dbCursor = dbConnection.cursor()
+    dbCursor.execute("DROP TABLE IF EXISTS companies;")
+    
+    dbCursor.close()
+    dbConnection.close()
+
 def adminCreateStartingDatabase():
     # Process hubSpot-contacts.csv
     hubspotData = getCSVDataBreakDown("contacts", "hubSpot")

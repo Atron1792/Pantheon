@@ -28,3 +28,4 @@ getSpecificData:
 --> Attributes: ["attribute1", "attribute2", etc]
 --> conditions: ["(result)", false, etc]
 --> --> Using the example above, attribute1 must equal (result), attribute2 doesn't have a condition.
+
