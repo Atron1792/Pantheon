@@ -5,9 +5,40 @@ import pandas as pd
 orderedDataPath = "../../Data/orderedData"
 rawDataPath = "../../Data/rawData"
 
+# checks if a csv attribute can be converted to integer
+# returns "INTEGER" if all values can be converted, "TEXT" otherwise
+def checkAttributeType(columnData):
+    try:
+        for value in columnData:
+            int(value)
+        return "INTEGER"
+    except (ValueError, TypeError):
+        return "TEXT"
+
 def adminCreateStartingDatabase():
+    # Process hubSpot-contacts.csv
+    hubspotData = getCSVDataBreakDown("contacts", "hubSpot")
+    hubspotHeaders = hubspotData[0]
+    hubspotRows = hubspotData[1]
+    hubspotHeaderTypes = []
     
-    print("hello world")
+    for i in range(len(hubspotHeaders)):
+        columnData = [row[i] for row in hubspotRows]
+        hubspotHeaderTypes.append(checkAttributeType(columnData))
+    
+    createNewTable("contacts", "hubSpot", hubspotHeaders, hubspotHeaderTypes, hubspotRows, "CRM")
+    
+    # Process googleAnalytics4-traffic_acquisition.csv
+    ga4Data = getCSVDataBreakDown("traffic_acquisition", "googleAnalytics4")
+    ga4Headers = ga4Data[0]
+    ga4Rows = ga4Data[1]
+    ga4HeaderTypes = []
+    
+    for i in range(len(ga4_headers)):
+        columnData = [row[i] for row in ga4Rows]
+        ga4HeaderTypes.append(checkAttributeType(columnData))
+    
+    createNewTable("traffic_acquisition", "googleAnalytics4", ga4Headers, ga4HeaderTypes, ga4Rows, "analytics")
 
 # gets the list of headers and the row data list (- headers)
 def getCSVDataBreakDown(tName, techStackItemName):
@@ -17,7 +48,7 @@ def getCSVDataBreakDown(tName, techStackItemName):
     
     columns = list(df.columns)
     
-    data = df.values.toList()
+    data = df.values.tolist()
     return [columns, data]
 
 # tName: table name
