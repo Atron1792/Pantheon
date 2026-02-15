@@ -251,3 +251,19 @@ def getSpecificData(tName, techStackItemName, attributes, conditions, tType):
     dbCursor.close()
     dbConnection.close()
     return result
+
+def getAllData(tName, techStackItemName, conditions, tType):
+    dbLocalPath = orderedDataPath + "/" + tType + "/" + techStackItemName + "/" + techStackItemName + ".db"
+    dbConnection = sqlite3.connect(dbLocalPath)
+    dbCursor = dbConnection.cursor() 
+    
+    sqlConditions = ""
+    if (conditions != ""):
+        sqlConditions = " WHERE "
+        sqlConditions += conditions
+        
+    dbCursor.execute("SELECT * FROM " + tName + sqlConditions + ";")
+    result = dbCursor.fetchall()
+    dbCursor.close()
+    dbConnection.close()
+    return result

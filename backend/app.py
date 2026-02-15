@@ -1,7 +1,7 @@
 import sqlite3
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-from utils.dbManager import adminCreateStartingDatabase, getSpecificData
+from utils.dbManager import adminCreateStartingDatabase, getSpecificData, getAllData
 import json
 
 
@@ -25,5 +25,18 @@ def barData():
     
     return jsonify(outputValues)
 
+# filterType = none or Marketing contact or Non-marketing contact
+@app.route("/api/contactData", methods=['POST','GET'])
+def contactData():
+    outputValues = []
+    if request.method == 'POST' or request.method == 'GET':
+        filterType = request.form['filterType']
+        if filterType == "none":
+            outputValues = getAllData("contacts","hubSpot", "" ,"CRM")
+        else:
+            outputValues = getAllData("contacts","hubSpot", "'Marketing contact status' = '" + filterType + "'" ,"CRM")
+        
+    return jsonify(outputValues)
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
