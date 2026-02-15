@@ -89,13 +89,15 @@ def createNewTable(tName, techStackItemName, tHeaders, tHeadersType, tData, tTyp
     # get all of the headers and data type into an sql string
     sqlHeaderString = ""
     for i in range(len(tHeaders)):
+        # Quote column names to handle spaces and special characters
+        quotedHeader = '"' + tHeaders[i] + '"'
         if(i == len(tHeaders)-1):
-            sqlHeaderString += tHeaders[i] + " " + tHeadersType[i]
+            sqlHeaderString += quotedHeader + " " + tHeadersType[i]
         else:
-            sqlHeaderString += tHeaders[i] + " " + tHeadersType[i] + ","
+            sqlHeaderString += quotedHeader + " " + tHeadersType[i] + ", "
             
     # execute the sql create table using table name and header string
-    dbCursor.execute("CREATE TABLE " + tName + " (" + sqlHeaderString + ");")
+    dbCursor.execute("CREATE TABLE IF NOT EXISTS " + tName + " (" + sqlHeaderString + ");")
     
     # get all of the data into an sql string
     sqlDataString = ""
@@ -104,10 +106,17 @@ def createNewTable(tName, techStackItemName, tHeaders, tHeadersType, tData, tTyp
         sqlDataString += "("
         
         for h in range(len(tData[i])):
+            # Convert value to string and handle proper SQL formatting
+            value = str(tData[i][h])
+            
+            # If this column is TEXT type, wrap in quotes and escape single quotes
+            if tHeadersType[h] == "TEXT":
+                value = "'" + value.replace("'", "''") + "'"
+            
             if(h == len(tData[i])-1):
-                sqlDataString += tData[i][h]
+                sqlDataString += value
                 break
-            sqlDataString += tData[i][h] + ","
+            sqlDataString += value + ","
             
         sqlDataString += ")"                        
         
