@@ -5,22 +5,28 @@ orderedDataPath = "../../Data/orderedData"
 rawDataPath = "../../Data/rawData"
 
 # tName: table name
-# tType: software name
+# techStackItemName: software name
 # tHeaders: table headers
 # tData: table data
 # tHeadersType: table headers data type
-def createNewTable(tName, tType, tHeaders, tHeadersType, tData):
-    orderedDataContents = os.listdir(orderedDataPath)
+# tType: analytics or CRM
+def createNewTable(tName, techStackItemName, tHeaders, tHeadersType, tData, tType):
+    orderedDataContents = ""
+    
+    if(tType == "analytics"):
+        orderedDataContents = os.listdir(orderedDataPath + "/analytics")
+    else:
+        orderedDataContents = os.listdir(orderedDataPath + "/CRM")
     
     # checks to see if database for tech item exists
     # if no: create folder 
     tableExist = False
     for techItem in orderedDataContents:
-        if(techItem == tType):
+        if(techItem == techStackItemName):
             tableExist = True
             break
     
-    newFolderPath = orderedDataPath + "/" + tType
+    newFolderPath = orderedDataPath + "/"+ tType +"/"+ techStackItemName
     
     if(tableExist == False):
         os.makedirs(newFolderPath, exist_ok=True)
@@ -73,4 +79,5 @@ def createNewTable(tName, tType, tHeaders, tHeadersType, tData):
 # if new data source detected, return:
 #   [Tech stack item name, Table name, [header1, header2, etc], case 1 or 2]
 def startUpDataValidation():
-    print("hello world")
+    rawDataTechStackItem = os.listdir(rawDataPath)
+    

@@ -20,5 +20,5 @@ Variable formats:
 --> tName (table name): lowercase String
 --> tHeaders: [header1,header2,header3,etc]
 --> tHeadersType: [header1datatype, header2datatype, et]
---> tType (Tech stack item name): lowercase string 
-
+--> techStackItemName (Tech stack item name): lowercase string 
+--> tType (CRM or analytics): lowercase string 
