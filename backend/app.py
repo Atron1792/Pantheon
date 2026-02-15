@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from utils.dbManager import adminCreateStartingDatabase, getSpecificData, getAllData
+from utils.dbManager import adminCreateStartingDatabase, getSpecificData, getAllData, startUpDataValidation, getCSVDataSourceHeaders
 import json
 
 
@@ -37,6 +37,16 @@ def contactData():
             outputValues = getAllData("contacts","hubSpot", "'Marketing contact status' = '" + filterType + "'" ,"CRM")
         
     return jsonify(outputValues)
+
+@app.route("/")
+def index():
+    notifications = startUpDataValidation()
+    if notifications != True:
+        numberOfNotifications = len(notifications)
+        
+        print("hello world")
+        #send notification here
+    
     
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
